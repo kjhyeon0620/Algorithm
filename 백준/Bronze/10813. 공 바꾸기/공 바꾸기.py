@@ -8,5 +8,4 @@ for _ in range(M):
     i, j = map(int, input().split())
     balls[i], balls[j] = balls[j], balls[i]
 
-for i in range(1, N+1):
-    print(balls[i], end=" ")
+print(*balls[1:])
