@@ -1,40 +1,29 @@
-# 집합을 이용해 주어진 연산을 수행한다.
-
 import sys
 
-
-input = sys.stdin.readline
-
-M = int(input())
+m = int(sys.stdin.readline())
 S = set()
-for _ in range(M):
-    op = input().strip()
-    if op == "all":
-        S = set(range(1, 21))
 
-    elif op == "empty":
-        S = set()
-
+for _ in range(m):
+    temp = sys.stdin.readline().strip().split()
+    
+    if len(temp) == 1:
+        if temp[0] == "all":
+            S = set([i for i in range(1, 21)])
+        else:
+            S = set()
+    
     else:
-        op, num = op.split()
-        num = int(num)
+        func, x = temp[0], temp[1]
+        x = int(x)
 
-        if op == "add":
-            S.add(num)
-
-        elif op == "remove" and num in S:
-            S.discard(num)
-
-        elif op == "check":
-            if num in S:
-                sys.stdout.write("1\n")
+        if func == "add":
+            S.add(x)
+        elif func == "remove":
+            S.discard(x)
+        elif func == "check":
+            print(1 if x in S else 0)
+        elif func == "toggle":
+            if x in S:
+                S.discard(x)
             else:
-                sys.stdout.write("0\n")
-
-        elif op == "toggle":
-            if num in S:
-                S.discard(num)
-            else:
-                S.add(num)
-
-
+                S.add(x)
