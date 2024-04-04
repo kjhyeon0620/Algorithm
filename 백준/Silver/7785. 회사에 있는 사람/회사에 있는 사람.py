@@ -13,7 +13,7 @@ for _ in range(n):
     if op == "enter":
         exists[name] = True
     else:
-        exists.pop(name)
+        del exists[name]
 
 ans = list(exists.keys())
 ans.sort(reverse=True)
