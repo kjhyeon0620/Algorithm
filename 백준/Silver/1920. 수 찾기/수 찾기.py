@@ -1,25 +1,22 @@
+# dictionary를 이용해 존재하는 지 판단한다.
+
 import sys
-import bisect
 
 
-def binary_search(ordered_list, func_target):
-    index = bisect.bisect_left(ordered_list, func_target)
-
-    if index < len(ordered_list) and ordered_list[index] == func_target:
-        return index
-    else:
-        return None
-
-
-# sys.stdin = open('bj1920_in.txt', 'r')
+input = sys.stdin.readline
 N = int(input())
-card = list(map(int, input().split()))
-card.sort()
+isExist = dict()
+
+for getNum in map(int, input().split()):
+    isExist[getNum] = 1
+
 M = int(input())
-target = list(map(int, input().split()))
-for j in target:
-    search_value = binary_search(card, j)
-    if search_value is None:
-        print(0)
+for findNum in map(int, input().split()):
+    if isExist.get(findNum) is None:
+        sys.stdout.write("0\n")
     else:
-        print(1)
+        sys.stdout.write("1\n")
+
+
+
+
