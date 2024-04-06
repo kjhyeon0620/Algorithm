@@ -1,9 +1,5 @@
 # dictionary를 이용하여 해당 숫자의 개수를 출력한다.
 
-import sys
-
-
-input = sys.stdin.readline
 N = int(input())
 cards = list(map(int, input().split()))
 cnt = dict()
