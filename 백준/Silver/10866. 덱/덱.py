@@ -23,29 +23,29 @@ for _ in range(N):
         size -= 1
         if size == -1:
             size = 0
-            print(-1)
+            sys.stdout.write("-1\n")
         elif op[4] == "f":
-            print(deq.popleft())
+            sys.stdout.write(str(deq.popleft()) + "\n")
         else:
-            print(deq.pop())
+            sys.stdout.write(str(deq.pop()) + "\n")
 
     elif op[0] == "s":   # size
-        print(size)
-        
+        sys.stdout.write(str(size) + "\n")
+
     elif op[0] == "e":   # empty
         if size == 0:
-            print(1)
+            sys.stdout.write("1\n")
         else:
-            print(0)
-            
+            sys.stdout.write("0\n")
+
     elif op[0] == "f":   # front
         if size == 0:
-            print(-1)
+            sys.stdout.write("-1\n")
         else:
-            print(deq[0])
-            
+            sys.stdout.write(str(deq[0]) + "\n")
+
     elif op[0] == "b":   # back
         if size == 0:
-            print(-1)
+            sys.stdout.write("-1\n")
         else:
-            print(deq[size-1])
+            sys.stdout.write(str(deq[size-1]) + "\n")
