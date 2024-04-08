@@ -10,12 +10,12 @@ S = dict()
 ans = 0
 
 for _ in range(N):
-    inp = input().strip()
+    inp = input()
     S[inp] = True
     
 for _ in range(M):
-    findStr = input().strip()
-    if S.get(findStr) is not None:
+    findStr = input()
+    if findStr in S:
         ans += 1
         
 print(ans)
