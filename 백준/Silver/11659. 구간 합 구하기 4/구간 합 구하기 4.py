@@ -15,6 +15,6 @@ for i in range(2, N+1):
 
 for _ in range(M):
     i, j = map(int, input().split())
-    print(sums[j] - sums[i-1])
+    sys.stdout.write(str(sums[j]-sums[i-1]) + "\n")
 
 
