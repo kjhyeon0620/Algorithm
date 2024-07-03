@@ -20,10 +20,10 @@ for i in range(n):
         if board[i][j] == 1:
             board[i][j] = 0
             cnt += 1
-            queue = [[i, j]]
+            stack = [[i, j]]
             tmp = 0
-            while queue:
-                node = queue.pop()
+            while stack:
+                node = stack.pop()
                 y, x = node[0], node[1]
                 tmp += 1
                 for a in range(4):
@@ -31,7 +31,7 @@ for i in range(n):
                     nx = x + dx[a]
                     if 0 <= ny < n and 0 <= nx < m and board[ny][nx] == 1:
                         board[ny][nx] = 0
-                        queue.append([ny, nx])
+                        stack.append([ny, nx])
             areas.append(tmp)
 
 print(cnt)
