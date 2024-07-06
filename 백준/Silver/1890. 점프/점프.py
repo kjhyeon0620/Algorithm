@@ -1,24 +1,25 @@
-# 각 칸에서 목적지까지 도달할 수 있는 경우의 수를 dp를 이용하여 기록한다.
-
 import sys
+sys.setrecursionlimit(10**6)
+N = int(sys.stdin.readline())
+graph = []
+for _ in range(N):
+    graph.append(list(map(int, sys.stdin.readline().split())))
 
+direction = [(1, 0), (0, 1)]    # 하 우
+dp = [[-1]*N for _ in range(N)]
 
-input = sys.stdin.readline
-N = int(input())
-board = [list(map(int, input().split())) for _ in range(N)]
-dp = [[0] * N for _ in range(N)]
-dp[N-1][N-1] = 1
+def dfs(x, y):
+    if x == N-1 and y == N-1:
+        return 1
+    if dp[x][y] != -1:
+        return dp[x][y]
+    else:
+        dp[x][y] = 0
+        for d in direction:
+            nx = x + d[0] * graph[x][y]
+            ny = y + d[1] * graph[x][y]
+            if 0 <= nx < N and 0 <= ny < N:
+                dp[x][y] += dfs(nx, ny)
+    return dp[x][y]
 
-for a in range(N-2, -1, -1):
-    if a + board[N-1][a] < N:
-        dp[N-1][a] = dp[N-1][a+board[N-1][a]]
-    if a + board[a][N-1] < N:
-        dp[a][N-1] = dp[a+board[a][N-1]][N-1]
-for i in range(N-2, -1, -1):
-    for j in range(N-2, -1, -1):
-        if i + board[i][j] < N:
-            dp[i][j] += dp[i+board[i][j]][j]
-        if j + board[i][j] < N:
-            dp[i][j] += dp[i][j+board[i][j]]
-
-print(dp[0][0])
+print(dfs(0, 0))
