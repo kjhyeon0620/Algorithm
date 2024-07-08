@@ -1,19 +1,33 @@
-# pN -> 0, 2, 4, ... 2N 인덱스가 I이고 1, 3, ... 2N-1 인덱스가 O인 문자열
-# 모든 구간을 돌며 pN이 포함되어 있는 구간의 개수를 센다.
+# S에서 IOI 의 개수를 센다.
 
 N = int(input())
 M = int(input())
 S = input()
+nums = []
+tmp = -1
+ans = 0
 
-cnt = 0
+for i in range(M-1):
+    if S[i] == "I":
+        if tmp == -1:
+            tmp = 0
+        else:
+            if S[i+1] == "I":
+                nums.append(tmp)
+                tmp = -1
+    else:
+        if tmp != -1:
+            if S[i+1] == "I":
+                tmp += 1
+            else:
+                nums.append(tmp)
+                tmp = -1
 
-for i in range(M-(2*N)):
-    flag = True
-    for j in range(2*N + 1):
-        if (j % 2 == 0 and S[i+j] != "I") or (j % 2 == 1 and S[i+j] != "O"):
-            flag = False
-            break
-    if flag:
-        cnt += 1
+if tmp != -1:
+    nums.append(tmp)
+for num in nums:
+    if num >= N:
+        ans += num - N + 1
 
-print(cnt)
+print(ans)
+
