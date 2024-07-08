@@ -2,31 +2,37 @@
 
 k = int(input())
 operators = list(input().split())
-ans = []
+
 visited = [False] * 10
+maxAns = ""
+minAns = ""
 
 
-def dfs(num):
-    if len(tmp) == k+1:
-        ans.append("".join(map(str, tmp)))
+def check(n1, n2, o):
+    if o == ">":
+        return n1 > n2
+    else:
+        return n1 < n2
+
+
+def dfs(depth, s):
+    global minAns, maxAns
+
+    if depth == k+1:
+        if len(minAns) == 0:
+            minAns = s
+        else:
+            maxAns = s
         return
-    op = operators[len(tmp)-1]
-    for i in range(0, 10):
+
+    for i in range(10):
         if not visited[i]:
-            if (op == "<" and num < i) or (op == ">" and num > i):
+            if depth == 0 or check(int(s[-1]), i, operators[depth-1]):  # 길이가 0이거나, 부등호 관계를 만족하면
                 visited[i] = True
-                tmp.append(i)
-                dfs(i)
+                dfs(depth+1, s+str(i))
                 visited[i] = False
-                tmp.pop()
 
 
-for j in range(10):
-    tmp = [j]
-    visited[j] = True
-    dfs(j)
-    tmp.pop()
-    visited[j] = False
-
-print(ans[-1])
-print(ans[0])
+dfs(0, "")
+print(maxAns)
+print(minAns)
