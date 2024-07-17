@@ -4,9 +4,9 @@ import sys
 
 
 def solution(x, y, num):
-    if num == 0:
+    if num == 1:
         return
-    length = 3 ** (num-1)               # length => 한 변의 길이
+    length = num // 3               # length => 한 변의 길이
     for i in range(3):
         for j in range(3):
             nx = x + (length * i)
@@ -16,20 +16,12 @@ def solution(x, y, num):
                     for m in range(length):
                         board[nx + n][ny + m] = " "
             else:                       # 나머지 부분은 시작점과 num을 알맞게 바꿔 다시 함수를 호출한다.
-                solution(nx, ny, num-1)
+                solution(nx, ny, length)
 
 
 N = int(input())
-k = 1
-
-while True:             # math.log로 값을 계산할 경우 오차가 발생하므로 직접 계산해준다.
-    if 3 ** k == N:
-        break
-    else:
-        k += 1
-
 board = [["*" for _ in range(N)] for _ in range(N)]
-solution(0, 0, k)
 
+solution(0, 0, N)
 for a in range(N):
     sys.stdout.write("".join(board[a]) + "\n")
