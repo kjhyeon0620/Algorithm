@@ -1,17 +1,12 @@
-# 색깔별로 탐색하여 구역의 수를 센다.
-# 적록색약의 경우 리스트를 복사하여 R을 전부 G로 바꾼 후 구역을 센다.
+# 우선 색깔별로 탐색하여 구역의 수를 센다.
+# 적록색약의 경우 R을 전부 G로 바꾼 후 구역을 다시 센다.
 
-import copy
+import sys
 
 
+input = sys.stdin.readline
 N = int(input())
-board_normal = [list(input()) for _ in range(N)]
-board_redGreen = copy.deepcopy(board_normal)
-
-for i in range(N):
-    for j in range(N):
-        if board_redGreen[i][j] == "R":
-            board_redGreen[i][j] = "G"
+board = [list(input()) for _ in range(N)]
 
 
 def solution(area):
@@ -36,6 +31,9 @@ def solution(area):
     print(cnt, end=" ")
 
 
-
-solution(board_normal)
-solution(board_redGreen)
+solution(board)
+for i in range(N):
+    for j in range(N):
+        if board[i][j] == "R":
+            board[i][j] = "G"
+solution(board)
