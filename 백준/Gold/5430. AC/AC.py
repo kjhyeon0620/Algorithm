@@ -12,12 +12,15 @@ for i in range(int(input())):
     func = input().rstrip()
     n = int(input())
     nums = input().rstrip()
-    if nums == "[]":
+
+    if nums == "[]":    # 입력값이 비어 있는 경우는 예외로 처리한다.
         nums = []
     else:
         nums = nums[1:-1].split(",")
+
     nums = deque(nums)
     rev = False
+
     for op in func:
         if op == "R":
             rev = not rev
@@ -34,5 +37,5 @@ for i in range(int(input())):
     else:
         if rev:
             nums.reverse()
-        nums = "[" + ",".join(map(str, nums)) + "]"
-        print(nums)
+        print("[" + ",".join(nums) + "]")
+        
