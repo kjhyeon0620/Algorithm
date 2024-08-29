@@ -1,22 +1,14 @@
-# dictionary를 이용해 존재하는 지 판단한다.
-
-import sys
-
-
-input = sys.stdin.readline
 N = int(input())
-isExist = dict()
-
-for getNum in map(int, input().split()):
-    isExist[getNum] = 1
-
+An = list(map(int, input().split()))
 M = int(input())
-for findNum in map(int, input().split()):
-    if isExist.get(findNum) is None:
-        sys.stdout.write("0\n")
+nums = list(map(int, input().split()))
+dc = dict()
+
+for a in An:
+    dc[a] = 1
+
+for n in nums:
+    if dc.get(n) is None:
+        print(0)
     else:
-        sys.stdout.write("1\n")
-
-
-
-
+        print(1)
