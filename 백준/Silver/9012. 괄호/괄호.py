@@ -1,15 +1,8 @@
-# stack을 이용한다.
-# (가 입력되면 append, )가 입력되면 pop을 실행하여 VPS인지 판단한다.
-
-
-T = int(input())
-
-for _ in range(T):
-    inp = input()
+for _ in range(int(input())):
     stack = []
     ans = "YES"
     
-    for el in inp:
+    for el in input():
         if el == "(":
             stack.append(el)
         else:
