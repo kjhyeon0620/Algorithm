@@ -1,38 +1,31 @@
 import sys
-
-
-sys.setrecursionlimit(10**5)
+sys.setrecursionlimit(100000) # 재귀 깊이 제한 늘리기
 input = sys.stdin.readline
 
+n, m = map(int, input().split())
+parent = [i for i in range(n + 1)] # 자기 자신을 부모로 갖는 n + 1개 집합
 
-def find(parent, x):
+# 찾기 연산(같은 집합에 속하는지 확인하기 위한 함수)
+def find_parent(x):
     if parent[x] != x:
-        parent[x] = find(parent, parent[x])
+        parent[x] = find_parent(parent[x])
     return parent[x]
 
-
-def union(parent, rank, a, b):
-    rootA = find(parent, a)
-    rootB = find(parent, b)
-
-    if rootA != rootB:
-        if rank[rootA] < rank[rootB]:
-            parent[rootA] = rootB
-        else:
-            parent[rootB] = rootA
-            if rank[rootA] == rank[rootB]:
-                rank[rootA] += 1
-
-
-n, m, = map(int, input().split())
-parent = [i for i in range(n+1)]
-rank = [0 for _ in range(n+1)]
-for _ in range(m):
-    op, a, b = map(int, input().split())
-    if op == 0:
-        union(parent, rank, a, b)
+# 합집합 연산(두 집합을 합치기 위한 함수)
+def union_parent(a, b):
+    a = find_parent(a)
+    b = find_parent(b)
+    if a < b: # 값이 더 작은 쪽을 부모로
+        parent[b] = a
     else:
-        if find(parent, a) == find(parent, b):
-            print("yes")
+        parent[a] = b
+        
+for _ in range(m):
+    opr, a, b = map(int, input().split())
+    if opr == 0:
+        union_parent(a, b)
+    else:
+        if find_parent(a) == find_parent(b):
+            print("YES")
         else:
-            print("no")
+            print("NO")
