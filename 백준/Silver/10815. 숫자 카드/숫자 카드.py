@@ -1,16 +1,15 @@
-import sys
+N = int(input())
+hasCards = list(map(int, input().split()))
+M = int(input())
+findCards = list(map(int, input().split()))
+cards = dict()
 
-N = int(sys.stdin.readline())
-cards = list(map(int, sys.stdin.readline().split()))
-M = int(sys.stdin.readline())
-checks = list(map(int, sys.stdin.readline().split()))
+for hc in hasCards:
+    cards[hc] = 1
 
-_dict = {}  # 속도는 dictionary!
-for i in range(len(cards)):
-    _dict[cards[i]] = 0  # 아무 숫자로 mapping
-
-for j in range(M):
-    if checks[j] not in _dict:
-        print(0, end=' ')
+for fc in findCards:
+    if cards.get(fc) is None:
+        print("0", end=" ")
     else:
-        print(1, end=' ')
+        print("1", end=" ")
+
