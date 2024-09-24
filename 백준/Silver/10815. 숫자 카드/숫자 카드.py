@@ -1,15 +1,10 @@
 N = int(input())
-hasCards = list(map(int, input().split()))
+hasCards = set(list(map(int, input().split())))
 M = int(input())
 findCards = list(map(int, input().split()))
-cards = dict()
-
-for hc in hasCards:
-    cards[hc] = 1
 
 for fc in findCards:
-    if cards.get(fc) is None:
-        print("0", end=" ")
-    else:
+    if fc in hasCards:
         print("1", end=" ")
-
+    else:
+        print("0", end=" ")
