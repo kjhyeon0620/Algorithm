@@ -1,6 +1,12 @@
 N = int(input())
-for i in range(N//5, -1, -1):
-    if (N - (i * 5)) % 3 == 0:
-        print(i + (N - (i * 5)) // 3)
-        exit(0)
-print(-1)
+
+cnt5 = N // 5
+ans = -1
+
+while cnt5 >= 0:
+    if (N - (cnt5 * 5)) % 3 == 0:
+        ans = cnt5 + (N - (cnt5 * 5)) // 3
+        break
+    cnt5 -= 1
+
+print(ans)
