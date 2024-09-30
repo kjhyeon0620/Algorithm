@@ -1,3 +1,6 @@
+import sys
+
+
 N = int(input())
 A = set(list(map(int, input().split())))
 M = int(input())
@@ -5,6 +8,6 @@ findNums = list(map(int, input().split()))
 
 for fn in findNums:
     if fn in A:
-        print(1)
+        sys.stdout.write("1\n")
     else:
-        print(0)
+        sys.stdout.write("0\n")
