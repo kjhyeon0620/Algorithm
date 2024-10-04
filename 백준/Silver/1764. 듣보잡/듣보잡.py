@@ -1,24 +1,21 @@
-# dictionary 에 듣도 못한 사람을 저장한다
-# 보도 못한 사람을 dictionary에 검색해서 존재하면 ans에 넣는다
-
 import sys
 
 
 input = sys.stdin.readline
-N, M = map(int, input().split())
-names = dict()
+
+N, M, = map(int, input().split())
+
+notHear = set()
 ans = []
-cnt = 0
+
 for _ in range(N):
-    names[input().strip()] = 1
+    notHear.add(input())
 
 for _ in range(M):
-    inp = input().strip()
-    if names.get(inp) is not None:
-        ans.append(inp)
-        cnt += 1
+    notLook = input()
+    if notLook in notHear:
+        ans.append(notLook.rstrip())
 
-ans.sort()
-print(cnt)
-for name in ans:
-    print(name)
+print(len(ans))
+for both in sorted(ans):
+    print(both)
