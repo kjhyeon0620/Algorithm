@@ -1,24 +1,22 @@
-# 2중 for 문을 이용해 답을 구한다.
-
 N, M = map(int, input().split())
 A = list(map(int, input().split()))
+
+left, right = 0, 1
+total = A[0]
 cnt = 0
 
-for i in range(N):
-    tmp = A[i]
-    
-    if tmp == M:
+while True:
+    if total == M:
         cnt += 1
-        continue
-    elif tmp > M:
-        continue
-        
-    for j in range(i+1, N):
-        tmp += A[j]
-        
-        if tmp == M:
-            cnt += 1
+        total -= A[left]
+        left += 1
+    elif total > M:
+        total -= A[left]
+        left += 1
+    else:
+        if right >= N:
             break
-        elif tmp > M:
-            break
+        total += A[right]
+        right += 1
+
 print(cnt)
