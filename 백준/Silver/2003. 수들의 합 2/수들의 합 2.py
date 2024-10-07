@@ -14,7 +14,7 @@ while True:
         total -= A[left]
         left += 1
     else:
-        if right >= N:
+        if right == N:
             break
         total += A[right]
         right += 1
