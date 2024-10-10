@@ -1,15 +1,17 @@
-# 합의 개수를 구하는 함수를 f라고 하면
-# f(1) = 1, f(2) = f(1) + 1(2로만 구성), f(3) = f(1) + f(2) + 1(3으로만 구성)
-# f(4) = f(1) + f(2) + f(3), f(n) = f(n-1) + f(n-2) + f(n-3)
+import sys
 
-def solution(num):
-    if memo[num] != -1:
-        return memo[num]
-    memo[num] = solution(num-1) + solution(num-2) + solution(num-3)
-    return memo[num]
 
-T = int(input())
-memo = [0, 1, 2, 4] + [-1] * 28
+input = sys.stdin.readline
 
-for _ in range(T):
-    print(solution(int(input())))
+dp = [-1 for _ in range(11)]
+dp[1], dp[2], dp[3] = 1, 2, 4
+
+def topDown(num):
+    if dp[num] != -1:
+        return dp[num]
+    dp[num] = topDown(num-1) + topDown(num-2) + topDown(num-3)
+    return dp[num]
+
+
+for _ in range(int(input())):
+    print(topDown(int(input())))
