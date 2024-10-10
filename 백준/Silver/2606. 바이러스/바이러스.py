@@ -1,18 +1,20 @@
-# dfs
-
 N = int(input())
 graph = [[] for _ in range(N+1)]
 for _ in range(int(input())):
-    com1, com2 = map(int, input().split())
-    graph[com1].append(com2)
-    graph[com2].append(com1)
+    n1, n2 = map(int, input().split())
+    graph[n1].append(n2)
+    graph[n2].append(n1)
 
-visited = [1]
 stack = [1]
+visited = [False for _ in range(N+1)]
+visited[1] = True
+ans = -1
 while stack:
-    el = stack.pop()
-    for i in graph[el]:
-        if i not in visited:
-            visited.append(i)
-            stack.append(i)
-print(len(visited)-1)
+    node = stack.pop()
+    ans += 1
+    for el in graph[node]:
+        if not visited[el]:
+            visited[el] = True
+            stack.append(el)
+
+print(ans)
