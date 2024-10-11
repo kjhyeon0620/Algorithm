@@ -1,22 +1,14 @@
-# 0 -> 1 0 / 1 -> 0 1 / 2 -> n(0) + n(1) / 3 -> n(2) + n(1)
-# 0: 1 0 1 1 2 3 5 8...
-# 1: 0 1 1 2 3 5 8 13 ...
-# 1, 1, 2, 3 ... 로 이뤄진 피보나치 수열을 이용해 0과 1의 횟수를 구한다.
+dp = [[-1, -1] for _ in range(41)]
 
-def fibonacci(num):
-    if memo[num] != -1:
-        return memo[num]
-    memo[num] = fibonacci(num-1) + fibonacci(num-2)
-    return memo[num]
+dp[0], dp[1] = [1, 0], [0, 1]
+ptr = 1
 
-T = int(input())
-memo = [0, 1, 1] + [-1] * 38
-
-for _ in range(T):
+for _ in range(int(input())):
     N = int(input())
-    if N == 0:
-        print("1 0")
-    elif N == 1:
-        print("0 1")
-    else:
-        print(fibonacci(N-1), fibonacci(N))
+    
+    if N > ptr:
+        for i in range(ptr+1, N+1):
+            dp[i][0] = dp[i-1][0] + dp[i-2][0]
+            dp[i][1] = dp[i-1][1] + dp[i-2][1]
+            
+    print(*dp[N])
