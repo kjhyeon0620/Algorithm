@@ -1,15 +1,13 @@
-# f(n) = f(n-1) + f(n-5) ( n >= 6)
+dp = [0, 1, 1, 1, 2, 2] + [-1 for _ in range(95)]
+cnt = 5
 
-def solution(num):
-    if memo[num] != -1:
-        return memo[num]
-    memo[num] = solution(num-1) + solution(num-5)
-    return memo[num]
-
-
-T = int(input())
-memo = [0, 1, 1, 1, 2, 2] + [-1] * 95
-
-for _ in range(T):
+for _ in range(int(input())):
     N = int(input())
-    print(solution(N))
+    if dp[N] != -1:
+        cnt = max(cnt, N)
+    else:
+        for i in range(cnt+1, N+1):
+            dp[i] = dp[i-1] + dp[i-5]
+        cnt = N
+        
+    print(dp[N])
