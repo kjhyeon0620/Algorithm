@@ -1,20 +1,22 @@
-# 이분탐색으로 정답을 구한다.
-
 N, M = map(int, input().split())
-heights = list(map(int, input().split()))
-left, right = 1, max(heights)
+trees = list(map(int, input().split()))
+
+trees.sort(reverse=True)
+left, right = 0, trees[0]
+
 while left <= right:
     total = 0
     mid = (left + right) // 2
-    for height in heights:
+    for height in trees:
         if height <= mid:
-            continue
+            break
         total += height - mid
-    if total > M:
-        left = mid+1
+    if total == M:
+        right = mid
+        break
     elif total < M:
-        right = mid-1
+        right = mid - 1
     else:
-        print(mid)
-        exit(0)
+        left = mid + 1
+
 print(right)
