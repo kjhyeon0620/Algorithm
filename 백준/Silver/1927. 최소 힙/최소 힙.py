@@ -1,21 +1,18 @@
-# heapq를 이용해 해결한다.
-
 import heapq
 import sys
 
 
 input = sys.stdin.readline
-heap = []
-cnt = 0
 N = int(input())
+
+minHeap = []
 for _ in range(N):
     x = int(input())
     if x == 0:
-        if cnt == 0:
-            sys.stdout.write("0\n")
+        if len(minHeap) == 0:
+            print(0)
         else:
-            sys.stdout.write(str(heapq.heappop(heap)) + "\n")
-            cnt -= 1
+            sys.stdout.write(str(heapq.heappop(minHeap)) + "\n")
+
     else:
-        heapq.heappush(heap, x)
-        cnt += 1
+        heapq.heappush(minHeap, x)
