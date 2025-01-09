@@ -12,7 +12,7 @@ for _ in range(N):
         if len(minHeap) == 0:
             print(0)
         else:
-            sys.stdout.write(str(heapq.heappop(minHeap)) + "\n")
+            print(heapq.heappop(minHeap))
 
     else:
         heapq.heappush(minHeap, x)
