@@ -1,3 +1,7 @@
+import sys
+
+
+input = sys.stdin.readline
 N = int(input())
 cost = [list(map(int, input().split())) for _ in range(N)]
 dp = [[cost[0][0], cost[0][1], cost[0][2]] for _ in range(N)]
