@@ -16,9 +16,8 @@ def dfs():
     if len(stack) == N-1:
         ops.append(stack.copy())
         return
-    prev = -1
     for i in range(N-1):
-        if nums[i] != prev and not visited[i]:
+        if not visited[i]:
             visited[i] = True
             stack.append(nums[i])
             dfs()
