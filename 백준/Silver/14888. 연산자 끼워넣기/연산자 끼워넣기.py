@@ -1,5 +1,3 @@
-# + - * /
-
 N = int(input())
 A = list(map(int, input().split()))
 numOfOperators = list(map(int, input().split()))
@@ -14,8 +12,12 @@ for i in range(4):
 
 def dfs():
     if len(stack) == N-1:
-        ops.append(stack.copy())
+        tmp = A[0]
+        for i in range(N-1):
+            tmp = calculator(tmp, A[i+1], stack[i])
+        ans.append(tmp)
         return
+
     for i in range(N-1):
         if not visited[i]:
             visited[i] = True
@@ -39,14 +41,8 @@ def calculator(num1, num2, op):
             return num1 // num2
 
 
-dfs()
 ans = []
-
-for op in ops:
-    tmp = A[0]
-    for i in range(N-1):
-        tmp = calculator(tmp, A[i+1], op[i])
-    ans.append(tmp)
+dfs()
 
 print(max(ans))
 print(min(ans))
