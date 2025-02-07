@@ -1,37 +1,31 @@
-# dfs를 통해 해결한다.
-
-import sys
-
-
-input = sys.stdin.readline
-
 N = int(input())
-region = []
-for _ in range(N):
-    region.append(list(map(int, input().split())))
 
-dx = [0, 0, 1, -1]
-dy = [1, -1, 0, 0]
+height = [list(map(int, input().split())) for _ in range(N)]
 ans = [1]
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
-for h in range(1, 100):
+for h in range(1, 99):
     visited = [[False for _ in range(N)] for _ in range(N)]
     cnt = 0
-    for i in range(N):
-        for j in range(N):
-            if region[i][j] > h and not visited[i][j]:
+    for x in range(N):
+        for y in range(N):
+            if not visited[x][y] and height[x][y] > h:
                 cnt += 1
-                stack = [[i, j]]
+                stack = [[x, y]]
+                visited[x][y] = True
                 while stack:
                     node = stack.pop()
-                    x, y, = node[1], node[0]
-                    if not (0 <= x < N and 0 <= y < N) or visited[y][x] or region[y][x] <= h:
-                        continue
-                    visited[y][x] = True
-                    for k in range(4):
-                        stack.append([y+dy[k], x+dx[k]])
+                    sx, sy = node[0], node[1]
+                    for i in range(4):
+                        nx = sx + dx[i]
+                        ny = sy + dy[i]
+                        if 0 <= nx < N and 0 <= ny < N and not visited[nx][ny] and height[nx][ny] > h:
+                            stack.append([nx, ny])
+                            visited[nx][ny] = True
     if cnt == 0:
         break
     ans.append(cnt)
 
 print(max(ans))
+
