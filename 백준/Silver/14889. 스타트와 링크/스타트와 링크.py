@@ -1,30 +1,40 @@
-import itertools
-import sys
-
-
-input = sys.stdin.readline
 N = int(input())
-status = []
 
-for _ in range(N):
-    status.append(list(map(int, input().split())))
+status = [list(map(int, input().split())) for _ in range(N)]
 
-teamA = list(itertools.combinations(range(N), N//2))
+for i in range(N-1):
+    for j in range(i+1, N):
+        status[i][j] += status[j][i]
+
+start = [0]
 ans = []
+visited = [False for _ in range(N)]
 
-for i in range(len(teamA)//2):
-    totalA = 0
-    totalB = 0
-    teamB = []
-    for j in range(N):
-        if j not in teamA[i]:
-            teamB.append(j)
-    for k in range(N//2):
-        for l in range(N//2):
-            totalA += status[teamA[i][k]][teamA[i][l]]
-            totalB += status[teamB[k]][teamB[l]]
-    ans.append(abs(totalA - totalB))
 
+def dfs(first):
+    if len(start) == N//2:
+        link = []
+        for i in range(N):
+            if i not in start:
+                link.append(i)
+        score_start = 0
+        score_link = 0
+
+        for i in range(N//2):
+            for j in range(i+1, N//2):
+                score_start += status[start[i]][start[j]]
+                score_link += status[link[i]][link[j]]
+        ans.append(abs(score_start-score_link))
+        return
+
+    for i in range(first+1, N):
+        if not visited[i]:
+            start.append(i)
+            visited[i] = True
+            dfs(i)
+            start.pop()
+            visited[i] = False
+
+
+dfs(0)
 print(min(ans))
-
-
