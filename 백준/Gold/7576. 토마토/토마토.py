@@ -1,5 +1,8 @@
 from collections import deque
+import sys
 
+
+input = sys.stdin.readline
 M, N = map(int, input().split())
 
 tomatoes = [list(map(int, input().split())) for _ in range(N)]
