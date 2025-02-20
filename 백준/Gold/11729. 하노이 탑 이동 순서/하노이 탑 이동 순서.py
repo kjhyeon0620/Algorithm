@@ -1,18 +1,22 @@
 import sys
 
 
-def solution(now, tmp, goal, num):
-    if num == 1:
-        ans.append([now, goal])
-    else:
-        solution(now, goal, tmp, num-1)
-        solution(now, tmp, goal, 1)
-        solution(tmp, now, goal, num-1)
+def solution(now, tmp, des, length):
+    global cnt
+    if length == 1:
+        cnt += 1
+        ans.append((now, des))
+        return
+    solution(now, des, tmp, length-1)
+    cnt += 1
+    ans.append((now, des))
+    solution(tmp, now, des, length-1)
 
 
-K = int(input())
+cnt = 0
 ans = []
-solution(1, 2, 3, K)
-print(len(ans))
-for process in ans:
-    sys.stdout.write(str(process[0]) + " " + str(process[1]) + "\n")
+solution(1, 2, 3, int(input()))
+print(cnt)
+for el in ans:
+    sys.stdout.write(str(el[0]) + ' ' + str(el[1]) + '\n')
+    
