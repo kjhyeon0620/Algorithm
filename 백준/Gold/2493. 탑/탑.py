@@ -1,15 +1,13 @@
 N = int(input())
 heights = list(map(int, input().split()))
-ans = [0 for _ in range(N)]
+ans = [0] * N
 stack = []
-for i in range(N-1, -1, -1):
-    for j in range(len(stack)):
-        idx, height = stack.pop()
-        if height <= heights[i]:
-            ans[idx] = i+1
-        else:
-            stack.append([idx, height])
-            break
-    stack.append([i, heights[i]])
+
+for i in range(N):
+    while stack and heights[stack[-1]] < heights[i]:
+        stack.pop()
+    if stack:
+        ans[i] = stack[-1] + 1  # 수신 가능한 탑의 번호 (1-based)
+    stack.append(i)
 
 print(*ans)
